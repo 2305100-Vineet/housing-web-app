@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>🏠 California Housing Price Predictor</title>
+    <title>CHPS - California Housing Prediction System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -30,15 +29,22 @@
             padding: 40px;
             border-radius: 15px;
             width: 100%;
-            max-width: 650px;
+            max-width: 700px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             animation: fadeIn 0.8s ease-in-out;
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 8px;
             color: #333;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
         }
 
         form {
@@ -75,7 +81,14 @@
             background: #2e59d9;
         }
 
-        /* Spinner */
+        .sample-btn {
+            background: #858796;
+        }
+
+        .sample-btn:hover {
+            background: #6c757d;
+        }
+
         .spinner {
             display: none;
             margin: 20px auto;
@@ -92,7 +105,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Result box */
         .result {
             margin-top: 20px;
             padding: 20px;
@@ -101,10 +113,9 @@
             color: #155724;
             text-align: center;
             font-weight: 500;
-            animation: fadeResult 1s ease-in-out;
+            animation: fadeResult 0.8s ease-in-out;
         }
 
-        /* Error box */
         .error {
             margin-top: 20px;
             padding: 20px;
@@ -155,13 +166,27 @@
         function showSpinner() {
             document.getElementById("spinner").style.display = "block";
         }
+
+        function fillSample() {
+            document.getElementsByName("MedInc")[0].value = 5;
+            document.getElementsByName("HouseAge")[0].value = 25;
+            document.getElementsByName("AveRooms")[0].value = 6;
+            document.getElementsByName("AveBedrms")[0].value = 1;
+            document.getElementsByName("Population")[0].value = 800;
+            document.getElementsByName("AveOccup")[0].value = 3;
+            document.getElementsByName("Latitude")[0].value = 34;
+            document.getElementsByName("Longitude")[0].value = -118;
+        }
     </script>
 </head>
 
 <body>
 
 <div class="container">
-    <h1>🏠 Housing Price Prediction</h1>
+    <h1>🏠 California Housing Prediction System (CHPS)</h1>
+    <div class="subtitle">
+        Based on California Housing Dataset (1990 U.S. Census Data)
+    </div>
 
     <form action="/predict" method="POST" onsubmit="showSpinner()">
         <input type="number" step="any" name="MedInc" placeholder="Median Income" required>
@@ -173,7 +198,8 @@
         <input type="number" step="any" name="Latitude" placeholder="Latitude" required>
         <input type="number" step="any" name="Longitude" placeholder="Longitude" required>
 
-        <button type="submit">Predict</button>
+        <button type="button" class="sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
+        <button type="submit">🔍 Predict Housing Category</button>
     </form>
 
     <div class="spinner" id="spinner"></div>
@@ -181,7 +207,7 @@
     {% if market_value %}
         <div class="result">
             <p><strong>Estimated Market Value:</strong> ${{ market_value }}</p>
-            <p><strong>Housing Tier:</strong> {{ tier }}</p>
+            <p><strong>Predicted Category:</strong> {{ tier }}</p>
         </div>
     {% endif %}
 
@@ -193,7 +219,7 @@
 </div>
 
 <footer>
-    Developed by <strong>Vineet Jha</strong> |
+    Developed by <strong>Vineet Kumar Jha</strong> |
     <a href="https://github.com/2305100-Vineet" target="_blank">
         View GitHub Profile
     </a>
@@ -201,4 +227,3 @@
 
 </body>
 </html>
-

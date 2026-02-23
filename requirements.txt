@@ -3,4 +3,6 @@ gunicorn
 gdown
 pandas
 scikit-learn
+numpy
+joblib
 

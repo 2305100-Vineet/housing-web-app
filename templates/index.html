@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>California Housing Prediction System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: white;
+        }
+
+        .header {
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .header p {
+            margin-top: 5px;
+            font-size: 16px;
+            color: #e0e0e0;
+        }
+
+        .container {
+            background: #f5f5f5;
+            color: black;
+            width: 450px;
+            margin: 30px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2b5876;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #1f3e54;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #e8f5e9;
+            border: 2px solid #2e7d32;
+        }
+
+        .result-box h2 {
+            margin: 5px 0;
+            color: #1b5e20;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🏠 California Housing Prediction System</h1>
+        <p>End-to-End Machine Learning Web Application (Flask + ML Model)</p>
+        <p>Course: Applications Development Laboratory (CS33002) | Student: Vineet Kumar Jha | 6th Semester KIIT</p>
+    </div>
+
+    <div class="container">
+        <h2>Enter Housing Features</h2>
+        <p>Enter numeric values for real-time prediction</p>
+
+        <form action="/predict" method="post">
+            <input type="number" step="any" name="MedInc" placeholder="Median Income (e.g. 5.0)" required>
+            <input type="number" step="any" name="HouseAge" placeholder="House Age (e.g. 25)" required>
+            <input type="number" step="any" name="AveRooms" placeholder="Average Rooms (e.g. 6)" required>
+            <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms (e.g. 1)" required>
+            <input type="number" step="any" name="Population" placeholder="Population (e.g. 800)" required>
+            <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy (e.g. 3)" required>
+            <input type="number" step="any" name="Latitude" placeholder="Latitude (e.g. 34)" required>
+            <input type="number" step="any" name="Longitude" placeholder="Longitude (e.g. -118)" required>
+
+            <button type="submit">🔍 Predict Market Value & Price Tier</button>
+        </form>
+
+        <!-- Prediction Output -->
+        {% if market_value %}
+        <div class="result-box">
+            <h2>💰 Estimated Market Value: ${{ market_value }}</h2>
+            <h2>🏷️ Price Tier: {{ tier }}</h2>
+        </div>
+        {% endif %}
+
+        <!-- Error Handling -->
+        {% if error %}
+        <div class="error">
+            Error: {{ error }}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        Developed for CS33002 Lab | End-to-End ML Project with Regression & Classification Deployment
+    </div>
+
+</body>
+</html>

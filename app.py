@@ -1,13 +1,25 @@
 from flask import Flask, render_template, request
 import numpy as np
 import joblib
+import os
+import gdown
 
 app = Flask(__name__)
 
+# Google Drive File ID of your model (DO NOT CHANGE)
+FILE_ID = "16Dl3JGKWk_o8uUhA_R61zvLosYaZNak3"
+MODEL_PATH = "housing_model.pkl"
+
+# Auto-download model if not present (needed for Render because PKL > 25MB)
+if not os.path.exists(MODEL_PATH):
+    url = f"https://drive.google.com/uc?id={FILE_ID}"
+    print("Downloading model from Google Drive...")
+    gdown.download(url, MODEL_PATH, quiet=False)
+
 # Load saved models (Regression + Random Forest)
-data = joblib.load("housing_model.pkl")
-reg_model = data["reg_model"]   # Multiple Linear Regression
-rf_model = data["rf_model"]     # Random Forest Classifier
+data = joblib.load(MODEL_PATH)
+reg_model = data["reg_model"]   # Multiple Linear Regression (Market Value)
+rf_model = data["rf_model"]     # Random Forest Classifier (Price Tier)
 
 
 @app.route("/")
@@ -18,7 +30,7 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-        # Get values from form
+        # Get input values from form
         MedInc = float(request.form["MedInc"])
         HouseAge = float(request.form["HouseAge"])
         AveRooms = float(request.form["AveRooms"])
@@ -28,20 +40,28 @@ def predict():
         Latitude = float(request.form["Latitude"])
         Longitude = float(request.form["Longitude"])
 
-        # Arrange input in correct feature order (VERY IMPORTANT ORDER)
-        features = np.array([[MedInc, HouseAge, AveRooms, AveBedrms,
-                              Population, AveOccup, Latitude, Longitude]])
+        # Correct feature order (MANDATORY as per California Housing dataset)
+        features = np.array([[
+            MedInc,
+            HouseAge,
+            AveRooms,
+            AveBedrms,
+            Population,
+            AveOccup,
+            Latitude,
+            Longitude
+        ]])
 
-        # 1️⃣ Regression Prediction (Estimated Market Value)
+        # 🔹 1. Regression Prediction (Estimated Market Value)
         market_value = reg_model.predict(features)[0]
 
-        # Convert to readable price (dataset scale is in 100,000s)
+        # Dataset target is in 100,000s → convert to actual price
         estimated_price = round(market_value * 100000, 2)
 
-        # 2️⃣ Classification Prediction (Price Tier using Random Forest)
+        # 🔹 2. Classification Prediction (Price Tier using Random Forest)
         tier_pred = rf_model.predict(features)[0]
 
-        # Convert numeric class to label
+        # Convert class number to readable label (as per assignment 3 classes)
         if tier_pred == 0:
             tier_label = "Low Value Housing"
         elif tier_pred == 1:
@@ -59,5 +79,7 @@ def predict():
         return render_template("index.html", error=str(e))
 
 
+# IMPORTANT: Dynamic port for Render deployment (DO NOT REMOVE)
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)

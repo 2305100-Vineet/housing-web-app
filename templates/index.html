@@ -2,142 +2,202 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>California Housing Prediction System</title>
+    <title>Housing Price Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #2b5876, #4e4376);
+        * {
             margin: 0;
             padding: 0;
-            text-align: center;
-            color: white;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .header {
+        body {
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
             padding: 20px;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 36px;
-        }
-
-        .header p {
-            margin-top: 5px;
-            font-size: 16px;
-            color: #e0e0e0;
-        }
-
         .container {
-            background: #f5f5f5;
-            color: black;
-            width: 450px;
-            margin: 30px auto;
-            padding: 25px;
+            background: white;
+            padding: 40px;
             border-radius: 15px;
-            box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            animation: fadeIn 0.8s ease-in-out;
         }
 
-        h2 {
-            margin-bottom: 10px;
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
 
         input {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
+            padding: 12px;
             border-radius: 8px;
             border: 1px solid #ccc;
-            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4e73df;
+            outline: none;
         }
 
         button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
+            grid-column: span 2;
+            padding: 14px;
+            background: #4e73df;
+            color: white;
             border: none;
             border-radius: 8px;
-            background-color: #2b5876;
-            color: white;
-            font-size: 16px;
             cursor: pointer;
-            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
         }
 
         button:hover {
-            background-color: #1f3e54;
+            background: #2e59d9;
         }
 
-        .result-box {
+        /* Spinner */
+        .spinner {
+            display: none;
+            margin: 20px auto;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #4e73df;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Result box */
+        .result {
             margin-top: 20px;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
-            background-color: #e8f5e9;
-            border: 2px solid #2e7d32;
+            background: #eafaf1;
+            color: #155724;
+            text-align: center;
+            font-weight: 500;
+            animation: fadeResult 1s ease-in-out;
         }
 
-        .result-box h2 {
-            margin: 5px 0;
-            color: #1b5e20;
-        }
-
+        /* Error box */
         .error {
-            color: red;
-            margin-top: 15px;
-            font-weight: bold;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fdecea;
+            color: #b71c1c;
+            text-align: center;
         }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 13px;
-            color: #ddd;
+        footer {
+            margin-top: 25px;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeResult {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media(max-width: 600px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+            button {
+                grid-column: span 1;
+            }
         }
     </style>
+
+    <script>
+        function showSpinner() {
+            document.getElementById("spinner").style.display = "block";
+        }
+    </script>
 </head>
+
 <body>
 
-    <div class="header">
-        <h1>🏠 California Housing Prediction System</h1>
-        <p>End-to-End Machine Learning Web Application (Flask + ML Model)</p>
-        <p>Course: Applications Development Laboratory (CS33002) | Student: Vineet Kumar Jha | 6th Semester KIIT</p>
-    </div>
+<div class="container">
+    <h1>🏠 Housing Price Prediction</h1>
 
-    <div class="container">
-        <h2>Enter Housing Features</h2>
-        <p>Enter numeric values for real-time prediction</p>
+    <form action="/predict" method="POST" onsubmit="showSpinner()">
+        <input type="number" step="any" name="MedInc" placeholder="Median Income" required>
+        <input type="number" step="any" name="HouseAge" placeholder="House Age" required>
+        <input type="number" step="any" name="AveRooms" placeholder="Average Rooms" required>
+        <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms" required>
+        <input type="number" step="any" name="Population" placeholder="Population" required>
+        <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy" required>
+        <input type="number" step="any" name="Latitude" placeholder="Latitude" required>
+        <input type="number" step="any" name="Longitude" placeholder="Longitude" required>
 
-        <form action="/predict" method="post">
-            <input type="number" step="any" name="MedInc" placeholder="Median Income (e.g. 5.0)" required>
-            <input type="number" step="any" name="HouseAge" placeholder="House Age (e.g. 25)" required>
-            <input type="number" step="any" name="AveRooms" placeholder="Average Rooms (e.g. 6)" required>
-            <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms (e.g. 1)" required>
-            <input type="number" step="any" name="Population" placeholder="Population (e.g. 800)" required>
-            <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy (e.g. 3)" required>
-            <input type="number" step="any" name="Latitude" placeholder="Latitude (e.g. 34)" required>
-            <input type="number" step="any" name="Longitude" placeholder="Longitude (e.g. -118)" required>
+        <button type="submit">Predict</button>
+    </form>
 
-            <button type="submit">🔍 Predict Market Value & Price Tier</button>
-        </form>
+    <div class="spinner" id="spinner"></div>
 
-        <!-- Prediction Output -->
-        {% if market_value %}
-        <div class="result-box">
-            <h2>💰 Estimated Market Value: ${{ market_value }}</h2>
-            <h2>🏷️ Price Tier: {{ tier }}</h2>
+    {% if market_value %}
+        <div class="result">
+            <p><strong>Estimated Market Value:</strong> ${{ market_value }}</p>
+            <p><strong>Housing Tier:</strong> {{ tier }}</p>
         </div>
-        {% endif %}
+    {% endif %}
 
-        <!-- Error Handling -->
-        {% if error %}
+    {% if error %}
         <div class="error">
-            Error: {{ error }}
+            {{ error }}
         </div>
-        {% endif %}
-    </div>
+    {% endif %}
+</div>
 
-    <div class="footer">
-        Developed for CS33002 Lab | End-to-End ML Project with Regression & Classification Deployment
-    </div>
+<footer>
+    Developed by <strong>Vineet Jha</strong> |
+    <a href="https://github.com/2305100-Vineet" target="_blank">
+        View GitHub Profile
+    </a>
+</footer>
 
 </body>
 </html>

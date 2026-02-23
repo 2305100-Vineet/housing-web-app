@@ -1,246 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>California Housing Prediction System</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+from flask import Flask, render_template, request
+import numpy as np
+import joblib
+import os
+import gdown
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+app = Flask(__name__)
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+# ==============================
+# Google Drive Model Settings
+# ==============================
 
-        body {
-            background: linear-gradient(135deg, #4e73df, #1cc88a);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+FILE_ID = "16Dl3JGKWk_o8uUhA_R61zvLosYaZNak3"
+MODEL_PATH = "housing_model.pkl"
 
-        .page-title {
-            color: white;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-align: center;
-        }
 
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 700px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            animation: fadeIn 0.8s ease-in-out;
-        }
+def download_model():
+    """Download model from Google Drive if not already present."""
+    if not os.path.exists(MODEL_PATH):
+        print("Downloading model from Google Drive...")
+        url = f"https://drive.google.com/uc?id={FILE_ID}"
+        gdown.download(url, MODEL_PATH, quiet=False)
 
-        .subtitle {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-        }
 
-        .section-title {
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #333;
-        }
+# Download model before loading
+download_model()
 
-        form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
+# ==============================
+# Load Models
+# ==============================
 
-        input {
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            transition: 0.3s;
-        }
+try:
+    data = joblib.load(MODEL_PATH)
+    reg_model = data["reg_model"]
+    rf_model = data["rf_model"]
+    print("Models loaded successfully.")
+except Exception as e:
+    print("Error loading model:", e)
+    reg_model = None
+    rf_model = None
 
-        input:focus {
-            border-color: #4e73df;
-            outline: none;
-        }
 
-        button {
-            grid-column: span 2;
-            padding: 14px;
-            background: #4e73df;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
+# ==============================
+# Routes
+# ==============================
 
-        button:hover {
-            background: #2e59d9;
-        }
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-        .sample-btn {
-            background: #858796;
-        }
 
-        .sample-btn:hover {
-            background: #6c757d;
-        }
+@app.route("/predict", methods=["POST"])
+def predict():
+    try:
+        if reg_model is None or rf_model is None:
+            return render_template("index.html", error="Model not loaded properly.")
 
-        .spinner {
-            display: none;
-            margin: 20px auto;
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid #4e73df;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
+        # Get form inputs
+        MedInc = float(request.form["MedInc"])
+        HouseAge = float(request.form["HouseAge"])
+        AveRooms = float(request.form["AveRooms"])
+        AveBedrms = float(request.form["AveBedrms"])
+        Population = float(request.form["Population"])
+        AveOccup = float(request.form["AveOccup"])
+        Latitude = float(request.form["Latitude"])
+        Longitude = float(request.form["Longitude"])
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        # Arrange features
+        features = np.array([[MedInc, HouseAge, AveRooms, AveBedrms,
+                              Population, AveOccup, Latitude, Longitude]])
 
-        .result {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #eafaf1;
-            color: #155724;
-            text-align: center;
-            font-weight: 500;
-            animation: fadeResult 0.8s ease-in-out;
-        }
+        # Regression prediction
+        market_value = reg_model.predict(features)[0]
+        estimated_price = round(market_value * 100000, 2)
 
-        .error {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #fdecea;
-            color: #b71c1c;
-            text-align: center;
-        }
+        # Classification prediction
+        tier_pred = rf_model.predict(features)[0]
 
-        footer {
-            margin-top: 25px;
-            color: white;
-            text-align: center;
-            font-size: 14px;
-        }
+        if tier_pred == 0:
+            tier_label = "Low Value Housing"
+        elif tier_pred == 1:
+            tier_label = "Medium Value Housing"
+        else:
+            tier_label = "High Value Housing"
 
-        footer a {
-            color: #fff;
-            font-weight: 600;
-            text-decoration: none;
-        }
+        return render_template(
+            "index.html",
+            market_value=estimated_price,
+            tier=tier_label
+        )
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+    except Exception as e:
+        return render_template("index.html", error=str(e))
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
-        @keyframes fadeResult {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
+# ==============================
+# Render / Production Server
+# ==============================
 
-        @media(max-width: 600px) {
-            form {
-                grid-template-columns: 1fr;
-            }
-            button {
-                grid-column: span 1;
-            }
-        }
-    </style>
-
-    <script>
-        function showSpinner() {
-            document.getElementById("spinner").style.display = "block";
-        }
-
-        function fillSample() {
-            document.getElementsByName("MedInc")[0].value = 5;
-            document.getElementsByName("HouseAge")[0].value = 25;
-            document.getElementsByName("AveRooms")[0].value = 6;
-            document.getElementsByName("AveBedrms")[0].value = 1;
-            document.getElementsByName("Population")[0].value = 800;
-            document.getElementsByName("AveOccup")[0].value = 3;
-            document.getElementsByName("Latitude")[0].value = 34;
-            document.getElementsByName("Longitude")[0].value = -118;
-        }
-    </script>
-</head>
-
-<body>
-
-<div class="page-title">
-    🏠 California Housing Prediction System
-</div>
-
-<div class="container">
-
-    <div class="subtitle">
-        Based on California Housing Dataset (1990 U.S. Census Data)
-    </div>
-
-    <div class="section-title">
-        Enter Housing Features
-    </div>
-
-    <form action="/predict" method="POST" onsubmit="showSpinner()">
-        <input type="number" step="any" name="MedInc" placeholder="Median Income" required>
-        <input type="number" step="any" name="HouseAge" placeholder="House Age" required>
-        <input type="number" step="any" name="AveRooms" placeholder="Average Rooms" required>
-        <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms" required>
-        <input type="number" step="any" name="Population" placeholder="Population" required>
-        <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy" required>
-        <input type="number" step="any" name="Latitude" placeholder="Latitude" required>
-        <input type="number" step="any" name="Longitude" placeholder="Longitude" required>
-
-        <button type="button" class="sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
-        <button type="submit">🔍 Predict Housing Category</button>
-    </form>
-
-    <div class="spinner" id="spinner"></div>
-
-    {% if market_value %}
-        <div class="result">
-            <p><strong>Estimated Market Value:</strong> ${{ market_value }}</p>
-            <p><strong>Predicted Category:</strong> {{ tier }}</p>
-        </div>
-    {% endif %}
-
-    {% if error %}
-        <div class="error">
-            {{ error }}
-        </div>
-    {% endif %}
-
-</div>
-
-<footer>
-    Developed by <strong>Vineet Kumar Jha</strong> |
-    <a href="https://github.com/2305100-Vineet" target="_blank">
-        View GitHub Profile
-    </a>
-</footer>
-
-</body>
-</html>
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)

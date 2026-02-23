@@ -6,20 +6,20 @@ import gdown
 
 app = Flask(__name__)
 
-# Google Drive File ID of your model (DO NOT CHANGE)
+# Google Drive File ID of your model (already correct)
 FILE_ID = "16Dl3JGKWk_o8uUhA_R61zvLosYaZNak3"
 MODEL_PATH = "housing_model.pkl"
 
-# Auto-download model if not present (needed for Render because PKL > 25MB)
+# Download model automatically if not present (IMPORTANT for Render)
 if not os.path.exists(MODEL_PATH):
-    url = f"https://drive.google.com/uc?id={FILE_ID}"
     print("Downloading model from Google Drive...")
+    url = f"https://drive.google.com/uc?id={FILE_ID}"
     gdown.download(url, MODEL_PATH, quiet=False)
 
 # Load saved models (Regression + Random Forest)
 data = joblib.load(MODEL_PATH)
-reg_model = data["reg_model"]   # Multiple Linear Regression (Market Value)
-rf_model = data["rf_model"]     # Random Forest Classifier (Price Tier)
+reg_model = data["reg_model"]   # Multiple Linear Regression (Estimated Market Value)
+rf_model = data["rf_model"]     # Random Forest (Price Tier Classification)
 
 
 @app.route("/")
@@ -40,28 +40,20 @@ def predict():
         Latitude = float(request.form["Latitude"])
         Longitude = float(request.form["Longitude"])
 
-        # Correct feature order (MANDATORY as per California Housing dataset)
-        features = np.array([[
-            MedInc,
-            HouseAge,
-            AveRooms,
-            AveBedrms,
-            Population,
-            AveOccup,
-            Latitude,
-            Longitude
-        ]])
+        # Arrange features in correct dataset order (MANDATORY)
+        features = np.array([[MedInc, HouseAge, AveRooms, AveBedrms,
+                              Population, AveOccup, Latitude, Longitude]])
 
-        # 🔹 1. Regression Prediction (Estimated Market Value)
+        # 1️⃣ Regression Prediction (Estimated Market Value)
         market_value = reg_model.predict(features)[0]
 
-        # Dataset target is in 100,000s → convert to actual price
+        # Dataset target is in 100,000 dollars scale
         estimated_price = round(market_value * 100000, 2)
 
-        # 🔹 2. Classification Prediction (Price Tier using Random Forest)
+        # 2️⃣ Classification Prediction (Price Tier using Random Forest)
         tier_pred = rf_model.predict(features)[0]
 
-        # Convert class number to readable label (as per assignment 3 classes)
+        # Convert numeric class to readable label (as per assignment reformulation)
         if tier_pred == 0:
             tier_label = "Low Value Housing"
         elif tier_pred == 1:
@@ -79,7 +71,8 @@ def predict():
         return render_template("index.html", error=str(e))
 
 
-# IMPORTANT: Dynamic port for Render deployment (DO NOT REMOVE)
+# IMPORTANT: Render uses dynamic PORT (this is the improvement)
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+

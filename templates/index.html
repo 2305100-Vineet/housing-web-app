@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CHPS - California Housing Prediction System</title>
+    <title>California Housing Prediction System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -24,6 +24,14 @@
             padding: 20px;
         }
 
+        .page-title {
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
         .container {
             background: white;
             padding: 40px;
@@ -34,17 +42,17 @@
             animation: fadeIn 0.8s ease-in-out;
         }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
         .subtitle {
             text-align: center;
             font-size: 14px;
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
         }
 
         form {
@@ -182,10 +190,18 @@
 
 <body>
 
+<div class="page-title">
+    🏠 California Housing Prediction System
+</div>
+
 <div class="container">
-    <h1>🏠 California Housing Prediction System (CHPS)</h1>
+
     <div class="subtitle">
         Based on California Housing Dataset (1990 U.S. Census Data)
+    </div>
+
+    <div class="section-title">
+        Enter Housing Features
     </div>
 
     <form action="/predict" method="POST" onsubmit="showSpinner()">
@@ -216,6 +232,7 @@
             {{ error }}
         </div>
     {% endif %}
+
 </div>
 
 <footer>

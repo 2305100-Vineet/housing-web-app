@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>California Housing Prediction System</title>
-
 <style>
     body {
         font-family: 'Segoe UI', sans-serif;
@@ -12,20 +6,21 @@
         padding: 0;
         text-align: center;
         color: white;
+        min-height: 100vh;
     }
 
     .header {
-        padding: 15px 0 5px 0;
+        padding: 18px 0 8px 0;
     }
 
     .header h1 {
         margin: 0;
-        font-size: 32px;   /* reduced from 38px */
+        font-size: 34px;
         font-weight: 600;
     }
 
     .header p {
-        margin-top: 5px;
+        margin-top: 6px;
         font-size: 14px;
         color: #e0e0e0;
     }
@@ -33,31 +28,31 @@
     .container {
         background: #f1f1f1;
         color: black;
-        width: 560px;     /* slightly reduced from 600px */
-        margin: 20px auto;
-        padding: 20px;    /* reduced from 30px */
+        width: 600px;
+        margin: 25px auto;
+        padding: 25px;
         border-radius: 20px;
         box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
     }
 
     .container h2 {
-        margin-bottom: 3px;
+        margin-bottom: 4px;
     }
 
     .subtitle {
         color: #555;
         font-size: 13px;
-        margin-bottom: 15px;
+        margin-bottom: 18px;
     }
 
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;   /* slightly reduced */
+        gap: 14px;
     }
 
     input {
-        padding: 9px;  /* reduced from 12px */
+        padding: 10px;
         border-radius: 8px;
         border: 1px solid #ccc;
         font-size: 13px;
@@ -67,7 +62,7 @@
 
     button {
         width: 100%;
-        padding: 11px;   /* slightly smaller */
+        padding: 12px;
         border: none;
         border-radius: 8px;
         color: white;
@@ -78,13 +73,13 @@
     }
 
     .sample-btn {
-        margin-top: 15px;
+        margin-top: 18px;
         background-color: #7e7e8a;
     }
 
     .predict-btn {
         background-color: #4f6bdc;
-        margin-top: 10px;
+        margin-top: 12px;
     }
 
     button:hover {
@@ -92,8 +87,8 @@
     }
 
     .result-box {
-        margin-top: 18px;
-        padding: 14px;
+        margin-top: 20px;
+        padding: 15px;
         border-radius: 10px;
         background-color: #d8f3dc;
         color: #1b5e20;
@@ -107,9 +102,9 @@
     }
 
     .footer {
-        margin-top: 30px;   /* reduced from 60px */
-        padding-bottom: 15px;
-        font-size: 20px;
+        margin-top: 30px;
+        padding-bottom: 20px;
+        font-size: 21px;
         color: #ffffff;
         font-weight: 300;
     }
@@ -127,102 +122,3 @@
         text-decoration: underline;
     }
 </style>
-
-<script>
-function fillSample() {
-
-    let toggleSample = localStorage.getItem("sampleToggle");
-
-    if (toggleSample === null) {
-        toggleSample = "high";
-    }
-
-    if (toggleSample === "high") {
-
-        // HIGH VALUE SAMPLE
-        document.getElementsByName("MedInc")[0].value = 8.5;
-        document.getElementsByName("HouseAge")[0].value = 20;
-        document.getElementsByName("AveRooms")[0].value = 7;
-        document.getElementsByName("AveBedrms")[0].value = 1;
-        document.getElementsByName("Population")[0].value = 1000;
-        document.getElementsByName("AveOccup")[0].value = 2;
-        document.getElementsByName("Latitude")[0].value = 34;
-        document.getElementsByName("Longitude")[0].value = -118;
-
-        localStorage.setItem("sampleToggle", "low");
-
-    } else {
-
-        // LOW VALUE SAMPLE
-        document.getElementsByName("MedInc")[0].value = 0.8;
-        document.getElementsByName("HouseAge")[0].value = 40;
-        document.getElementsByName("AveRooms")[0].value = 3;
-        document.getElementsByName("AveBedrms")[0].value = 1.5;
-        document.getElementsByName("Population")[0].value = 4000;
-        document.getElementsByName("AveOccup")[0].value = 4;
-        document.getElementsByName("Latitude")[0].value = 38;
-        document.getElementsByName("Longitude")[0].value = -121;
-
-        localStorage.setItem("sampleToggle", "high");
-    }
-}
-</script>
-
-</head>
-<body>
-
-<div class="header">
-    <h1>🏠 California Housing Prediction System</h1>
-    <p>Based on California Housing Dataset (1990 U.S. Census Data)</p>
-</div>
-
-<div class="container">
-    <h2>Enter Housing Features</h2>
-    <div class="subtitle">Enter numeric values for real-time prediction</div>
-
-    <form action="/" method="post">
-
-        <div class="form-grid">
-            <input type="number" step="any" name="MedInc" placeholder="Median Income" required>
-            <input type="number" step="any" name="HouseAge" placeholder="House Age" required>
-
-            <input type="number" step="any" name="AveRooms" placeholder="Average Rooms" required>
-            <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms" required>
-
-            <input type="number" step="any" name="Population" placeholder="Population" required>
-            <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy" required>
-
-            <input type="number" step="any" name="Latitude" placeholder="Latitude" required>
-            <input type="number" step="any" name="Longitude" placeholder="Longitude" required>
-        </div>
-
-        <button type="button" class="sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
-
-        <button type="submit" class="predict-btn">🔍 Predict Housing Category</button>
-    </form>
-
-    {% if market_value %}
-    <div class="result-box">
-        💰 <strong>Estimated Market Value:</strong> ${{ market_value }} <br><br>
-        🏷️ <strong>Predicted Category:</strong> {{ tier }}
-    </div>
-    {% endif %}
-
-    {% if error %}
-    <div class="error">
-        Error: {{ error }}
-    </div>
-    {% endif %}
-</div>
-
-<div class="footer">
-    Developed by <strong>Vineet Kumar Jha</strong> |
-    <a href="https://github.com/2305100-Vineet/housing-web-app" target="_blank">
-        <strong>View GitHub Profile</strong>
-    </a>
-</div>
-
-</body>
-</html>
-
-

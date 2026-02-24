@@ -80,14 +80,18 @@
         transition: 0.3s;
     }
 
-    /* ✅ UPDATED SAMPLE BUTTON COLOR */
     .sample-btn {
         margin-top: 16px;
-        background-color: #5a6f95 !important;
+        background-color: #5a6f95;
     }
 
     .predict-btn {
         background-color: #4f6bdc;
+        margin-top: 10px;
+    }
+
+    .clear-btn {
+        background-color: #dc3545;
         margin-top: 10px;
     }
 
@@ -132,7 +136,6 @@
         text-decoration: underline;
     }
 
-    /* ✅ Responsive */
     @media (max-width: 768px) {
 
         .container {
@@ -190,6 +193,10 @@ function fillSample() {
         localStorage.setItem("sampleToggle", "high");
     }
 }
+
+function clearForm() {
+    document.querySelector("form").reset();
+}
 </script>
 
 </head>
@@ -218,6 +225,7 @@ function fillSample() {
 
         <button type="button" class="sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
         <button type="submit" class="predict-btn">🔍 Predict Housing Category</button>
+        <button type="button" class="clear-btn" onclick="clearForm()">🗑 Clear All Inputs</button>
     </form>
 
     {% if market_value %}
@@ -243,5 +251,3 @@ function fillSample() {
 
 </body>
 </html>
-
-

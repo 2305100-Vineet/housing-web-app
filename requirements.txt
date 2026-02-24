@@ -1,9 +1,8 @@
-flask
+Flask
 gunicorn
-gdown
-pandas
-scikit-learn==1.6.1
 numpy
 joblib
+scikit-learn==1.6.1
+
 
 

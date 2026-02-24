@@ -6,168 +6,119 @@
 <title>California Housing Prediction System</title>
 
 <style>
-    body {
-        font-family: 'Segoe UI', sans-serif;
-        background: linear-gradient(135deg, #4e73df, #1cc88a);
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        color: white;
-        min-height: 100vh;
-    }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #4e73df, #1cc88a);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: white;
+}
 
-    .header {
-        padding: 15px 0 6px 0;
-    }
+.header {
+    padding: 15px 0 6px 0;
+}
 
-    .header h1 {
-        margin: 0;
-        font-size: 30px;
-        font-weight: 600;
-    }
+.header h1 {
+    margin: 0;
+    font-size: 30px;
+}
 
-    .header p {
-        margin-top: 5px;
-        font-size: 13px;
-        color: #e8f0ff;
-    }
+.header p {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #e8f0ff;
+}
 
+.container {
+    background: #f1f1f1;
+    color: black;
+    width: 570px;
+    margin: 25px auto;
+    padding: 22px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+}
+
+.heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clear-link {
+    font-size: 13px;
+    color: #6c757d;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.clear-link:hover {
+    color: #dc3545;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+input {
+    padding: 9px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    padding: 11px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.sample-btn {
+    background-color: #5a6f95;
+}
+
+.predict-btn {
+    background-color: #4f6bdc;
+}
+
+.result-box {
+    margin-top: 18px;
+    padding: 13px;
+    border-radius: 10px;
+    background-color: #d8f3dc;
+    color: #1b5e20;
+}
+
+.footer {
+    margin-top: 25px;
+    font-size: 18px;
+}
+
+@media (max-width: 768px) {
     .container {
-        background: #f1f1f1;
-        color: black;
-        width: 570px;
-        margin: 22px auto;
-        padding: 22px;
-        border-radius: 20px;
-        box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+        width: 90%;
     }
-
-    .container h2 {
-        margin-bottom: 4px;
-        font-size: 22px;
-    }
-
-    .subtitle {
-        color: #555;
-        font-size: 12.5px;
-        margin-bottom: 16px;
-    }
-
     .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        grid-template-columns: 1fr;
     }
-
-    input {
-        padding: 9px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 12.5px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    button {
-        width: 100%;
-        padding: 11px;
-        border: none;
-        border-radius: 8px;
-        color: white;
-        font-size: 14px;
-        cursor: pointer;
-        font-weight: 500;
-        transition: 0.3s;
-    }
-
-    .sample-btn {
-        margin-top: 16px;
-        background-color: #5a6f95;
-    }
-
-    .predict-btn {
-        background-color: #4f6bdc;
-        margin-top: 10px;
-    }
-
-    .clear-btn {
-        background-color: #dc3545;
-        margin-top: 10px;
-    }
-
-    button:hover {
-        opacity: 0.9;
-    }
-
-    .result-box {
-        margin-top: 18px;
-        padding: 13px;
-        border-radius: 10px;
-        background-color: #d8f3dc;
-        color: #1b5e20;
-        font-weight: 500;
-        font-size: 14px;
-    }
-
-    .error {
-        color: red;
-        margin-top: 10px;
-        font-weight: bold;
-    }
-
-    .footer {
-        margin-top: 25px;
-        padding-bottom: 18px;
-        font-size: 19px;
-        color: #ffffff;
-        font-weight: 300;
-    }
-
-    .footer strong {
-        font-weight: 700;
-    }
-
-    .footer a {
-        color: #ffffff;
-        text-decoration: none;
-    }
-
-    .footer a:hover {
-        text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-
-        .container {
-            width: 90%;
-            padding: 18px;
-        }
-
-        .form-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .header h1 {
-            font-size: 24px;
-        }
-
-        .footer {
-            font-size: 16px;
-        }
-    }
+}
 </style>
 
 <script>
 function fillSample() {
+    let toggle = localStorage.getItem("sampleToggle");
 
-    let toggleSample = localStorage.getItem("sampleToggle");
-
-    if (toggleSample === null) {
-        toggleSample = "high";
-    }
-
-    if (toggleSample === "high") {
-
+    if (!toggle || toggle === "low") {
         document.getElementsByName("MedInc")[0].value = 8.5;
         document.getElementsByName("HouseAge")[0].value = 20;
         document.getElementsByName("AveRooms")[0].value = 7;
@@ -176,11 +127,8 @@ function fillSample() {
         document.getElementsByName("AveOccup")[0].value = 2;
         document.getElementsByName("Latitude")[0].value = 34;
         document.getElementsByName("Longitude")[0].value = -118;
-
-        localStorage.setItem("sampleToggle", "low");
-
+        localStorage.setItem("sampleToggle", "high");
     } else {
-
         document.getElementsByName("MedInc")[0].value = 0.8;
         document.getElementsByName("HouseAge")[0].value = 40;
         document.getElementsByName("AveRooms")[0].value = 3;
@@ -189,8 +137,7 @@ function fillSample() {
         document.getElementsByName("AveOccup")[0].value = 4;
         document.getElementsByName("Latitude")[0].value = 38;
         document.getElementsByName("Longitude")[0].value = -121;
-
-        localStorage.setItem("sampleToggle", "high");
+        localStorage.setItem("sampleToggle", "low");
     }
 }
 
@@ -208,38 +155,62 @@ function clearForm() {
 </div>
 
 <div class="container">
-    <h2>Enter Housing Features</h2>
-    <div class="subtitle">Enter numeric values for real-time prediction</div>
+
+    <div class="heading-row">
+        <h2>Enter Housing Features</h2>
+        <span class="clear-link" onclick="clearForm()">Clear</span>
+    </div>
 
     <form action="/" method="post">
+
         <div class="form-grid">
-            <input type="number" step="any" name="MedInc" placeholder="Median Income" required>
-            <input type="number" step="any" name="HouseAge" placeholder="House Age" required>
-            <input type="number" step="any" name="AveRooms" placeholder="Average Rooms" required>
-            <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms" required>
-            <input type="number" step="any" name="Population" placeholder="Population" required>
-            <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy" required>
-            <input type="number" step="any" name="Latitude" placeholder="Latitude" required>
-            <input type="number" step="any" name="Longitude" placeholder="Longitude" required>
+
+            <input type="number" step="any" name="MedInc"
+            value="{{ inputs[0] if inputs else '' }}"
+            placeholder="Median Income" required>
+
+            <input type="number" step="any" name="HouseAge"
+            value="{{ inputs[1] if inputs else '' }}"
+            placeholder="House Age" required>
+
+            <input type="number" step="any" name="AveRooms"
+            value="{{ inputs[2] if inputs else '' }}"
+            placeholder="Average Rooms" required>
+
+            <input type="number" step="any" name="AveBedrms"
+            value="{{ inputs[3] if inputs else '' }}"
+            placeholder="Average Bedrooms" required>
+
+            <input type="number" step="any" name="Population"
+            value="{{ inputs[4] if inputs else '' }}"
+            placeholder="Population" required>
+
+            <input type="number" step="any" name="AveOccup"
+            value="{{ inputs[5] if inputs else '' }}"
+            placeholder="Average Occupancy" required>
+
+            <input type="number" step="any" name="Latitude"
+            value="{{ inputs[6] if inputs else '' }}"
+            placeholder="Latitude" required>
+
+            <input type="number" step="any" name="Longitude"
+            value="{{ inputs[7] if inputs else '' }}"
+            placeholder="Longitude" required>
+
         </div>
 
         <button type="button" class="sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
         <button type="submit" class="predict-btn">🔍 Predict Housing Category</button>
-        <button type="button" class="clear-btn" onclick="clearForm()">🗑 Clear All Inputs</button>
+
     </form>
 
     {% if market_value %}
     <div class="result-box">
-        💰 <strong>Estimated Market Value:</strong> ${{ market_value }} <br><br>
-        🏷️ <strong>Predicted Category:</strong> {{ tier }}
+        <strong>Estimated Market Value:</strong> ${{ market_value }}<br><br>
+        <strong>Predicted Category:</strong> {{ tier }}
     </div>
     {% endif %}
 
-    {% if error %}
-    <div class="error">
-        Error: {{ error }}
-    </div>
-    {% endif %}
 </div>
 
 <div class="footer">

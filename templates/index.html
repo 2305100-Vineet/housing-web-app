@@ -6,17 +6,24 @@
 <title>California Housing Prediction System</title>
 
 <style>
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #4e73df, #1cc88a);
-    margin: 0;
-    padding: 0;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: white;
 }
 
+/* HEADER */
 .header {
-    padding: 15px 0 6px 0;
+    padding: 18px 0 8px 0;
+    text-align: center;
 }
 
 .header h1 {
@@ -30,38 +37,60 @@ body {
     color: #e8f0ff;
 }
 
+/* MAIN CONTAINER */
 .container {
     background: #f1f1f1;
     color: black;
     width: 570px;
-    margin: 25px auto;
-    padding: 22px;
+    padding: 24px;
     border-radius: 20px;
     box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
 }
 
-.heading-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Title Centered */
+.container h2 {
+    margin: 0;
+    font-size: 22px;
+    text-align: center;
 }
 
-.clear-link {
+/* Subtitle */
+.subtitle {
+    text-align: center;
     font-size: 13px;
-    color: #6c757d;
+    color: #555;
+    margin-top: 6px;
+    margin-bottom: 18px;
+}
+
+/* Clear Button Placement */
+.clear-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.clear-btn {
+    font-size: 14px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    background-color: #f8d7da;
+    color: #842029;
     cursor: pointer;
-    text-decoration: underline;
+    font-weight: 500;
+    border: none;
 }
 
-.clear-link:hover {
-    color: #dc3545;
+.clear-btn:hover {
+    background-color: #f1b0b7;
 }
 
+/* Form Grid */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    margin-top: 15px;
 }
 
 input {
@@ -72,6 +101,7 @@ input {
     width: 100%;
 }
 
+/* Buttons */
 button {
     width: 100%;
     padding: 11px;
@@ -79,7 +109,7 @@ button {
     border-radius: 8px;
     color: white;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 12px;
     cursor: pointer;
 }
 
@@ -91,25 +121,39 @@ button {
     background-color: #4f6bdc;
 }
 
+/* Result */
 .result-box {
     margin-top: 18px;
-    padding: 13px;
+    padding: 14px;
     border-radius: 10px;
     background-color: #d8f3dc;
     color: #1b5e20;
 }
 
+/* Footer */
 .footer {
-    margin-top: 25px;
+    margin-top: auto;
+    padding: 15px 0;
     font-size: 18px;
+    text-align: center;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
     .container {
         width: 90%;
     }
+
     .form-grid {
         grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .footer {
+        font-size: 15px;
     }
 }
 </style>
@@ -142,7 +186,14 @@ function fillSample() {
 }
 
 function clearForm() {
-    document.querySelector("form").reset();
+    const form = document.querySelector("form");
+    form.reset();
+    localStorage.removeItem("sampleToggle");
+
+    const resultBox = document.querySelector(".result-box");
+    if (resultBox) {
+        resultBox.style.display = "none";
+    }
 }
 </script>
 
@@ -156,9 +207,11 @@ function clearForm() {
 
 <div class="container">
 
-    <div class="heading-row">
-        <h2>Enter Housing Features</h2>
-        <span class="clear-link" onclick="clearForm()">Clear</span>
+    <h2>Enter Housing Features</h2>
+    <div class="subtitle">Enter numeric values for real-time prediction</div>
+
+    <div class="clear-container">
+        <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
     </div>
 
     <form action="/" method="post">

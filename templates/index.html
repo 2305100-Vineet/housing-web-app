@@ -37,7 +37,7 @@ body {
     color: #e8f0ff;
 }
 
-/* MAIN CONTAINER */
+/* CONTAINER */
 .container {
     background: #f1f1f1;
     color: black;
@@ -48,11 +48,11 @@ body {
     margin-bottom: 20px;
 }
 
-/* Title Centered */
+/* Title */
 .container h2 {
     margin: 0;
-    font-size: 22px;
     text-align: center;
+    font-size: 22px;
 }
 
 /* Subtitle */
@@ -61,32 +61,32 @@ body {
     font-size: 13px;
     color: #555;
     margin-top: 6px;
+}
+
+/* Clear row below subtitle */
+.clear-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
     margin-bottom: 18px;
 }
 
-/* Clear Button Placement */
-.clear-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
-}
-
+/* Small Proper Clear Button */
 .clear-btn {
     font-size: 14px;
-    padding: 5px 12px;
+    padding: 4px 12px;
     border-radius: 6px;
-    background-color: #f8d7da;
-    color: #842029;
+    background-color: #e9ecef;
+    color: #333;
+    border: 1px solid #ccc;
     cursor: pointer;
-    font-weight: 500;
-    border: none;
 }
 
 .clear-btn:hover {
-    background-color: #f1b0b7;
+    background-color: #dee2e6;
 }
 
-/* Form Grid */
+/* Form grid */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -101,8 +101,8 @@ input {
     width: 100%;
 }
 
-/* Buttons */
-button {
+/* Main Buttons */
+button.main-btn {
     width: 100%;
     padding: 11px;
     border: none;
@@ -192,7 +192,7 @@ function clearForm() {
 
     const resultBox = document.querySelector(".result-box");
     if (resultBox) {
-        resultBox.style.display = "none";
+        resultBox.remove();
     }
 }
 </script>
@@ -210,7 +210,7 @@ function clearForm() {
     <h2>Enter Housing Features</h2>
     <div class="subtitle">Enter numeric values for real-time prediction</div>
 
-    <div class="clear-container">
+    <div class="clear-row">
         <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
     </div>
 
@@ -252,8 +252,8 @@ function clearForm() {
 
         </div>
 
-        <button type="button" class="sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
-        <button type="submit" class="predict-btn">🔍 Predict Housing Category</button>
+        <button type="button" class="main-btn sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
+        <button type="submit" class="main-btn predict-btn">🔍 Predict Housing Category</button>
 
     </form>
 

@@ -11,6 +11,10 @@ html, body {
     margin: 0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #4e73df, #1cc88a);
@@ -41,7 +45,7 @@ body {
 .container {
     background: #f1f1f1;
     color: black;
-    width: 570px;
+    width: 580px;
     padding: 24px;
     border-radius: 20px;
     box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
@@ -63,7 +67,7 @@ body {
     margin-top: 6px;
 }
 
-/* Clear row below subtitle */
+/* Clear row */
 .clear-row {
     display: flex;
     justify-content: flex-end;
@@ -71,7 +75,6 @@ body {
     margin-bottom: 18px;
 }
 
-/* Small Proper Clear Button */
 .clear-btn {
     font-size: 14px;
     padding: 4px 12px;
@@ -86,11 +89,11 @@ body {
     background-color: #dee2e6;
 }
 
-/* Form grid */
+/* FORM GRID PERFECT 50-50 */
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
 }
 
 input {
@@ -101,7 +104,7 @@ input {
     width: 100%;
 }
 
-/* Main Buttons */
+/* Buttons */
 button.main-btn {
     width: 100%;
     padding: 11px;
@@ -184,17 +187,6 @@ function fillSample() {
         localStorage.setItem("sampleToggle", "low");
     }
 }
-
-function clearForm() {
-    const form = document.querySelector("form");
-    form.reset();
-    localStorage.removeItem("sampleToggle");
-
-    const resultBox = document.querySelector(".result-box");
-    if (resultBox) {
-        resultBox.remove();
-    }
-}
 </script>
 
 </head>
@@ -211,7 +203,10 @@ function clearForm() {
     <div class="subtitle">Enter numeric values for real-time prediction</div>
 
     <div class="clear-row">
-        <button type="button" class="clear-btn" onclick="clearForm()">Clear</button>
+        <button type="button" class="clear-btn"
+            onclick="window.location.href='/'">
+            Clear
+        </button>
     </div>
 
     <form action="/" method="post">

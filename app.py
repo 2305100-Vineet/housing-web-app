@@ -2,33 +2,21 @@ from flask import Flask, render_template, request
 import numpy as np
 import joblib
 import os
-import gdown
 
 app = Flask(__name__)
 
-# === Google Drive File IDs ===
-REG_FILE_ID = "PASTE_REG_FILE_ID_HERE"
-RF_FILE_ID = "PASTE_RF_FILE_ID_HERE"
+# ==============================
+# Load Models (Direct from Repo)
+# ==============================
 
-REG_MODEL_PATH = "reg_model.pkl"
-RF_MODEL_PATH = "rf_model.pkl"
+reg_model = joblib.load("reg_model.pkl")
+rf_model = joblib.load("rf_model.pkl")
 
+print("Models loaded successfully.")
 
-def download_model(file_id, output_path):
-    if not os.path.exists(output_path):
-        print(f"Downloading {output_path}...")
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, output_path, quiet=False)
-
-
-# Download models once at startup
-download_model(REG_FILE_ID, REG_MODEL_PATH)
-download_model(RF_FILE_ID, RF_MODEL_PATH)
-
-# Load models once at startup
-reg_model = joblib.load(REG_MODEL_PATH)
-rf_model = joblib.load(RF_MODEL_PATH)
-
+# ==============================
+# Routes
+# ==============================
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -47,10 +35,11 @@ def home():
 
             features_array = np.array([features])
 
-            # Regression Prediction
+            # Regression prediction
             market_value = reg_model.predict(features_array)[0]
+            estimated_price = round(market_value * 100000, 2)
 
-            # Classification Prediction
+            # Classification prediction
             category_pred = rf_model.predict(features_array)[0]
 
             category_map = {
@@ -63,15 +52,20 @@ def home():
 
             return render_template(
                 "index.html",
-                prediction_text=f"Estimated Market Value: ${market_value:.2f}",
-                category_text=f"Predicted Category: {category}"
+                market_value=estimated_price,
+                tier=category
             )
 
         except Exception as e:
-            return render_template("index.html", prediction_text="Error occurred.")
+            return render_template("index.html", error=str(e))
 
     return render_template("index.html")
 
 
+# ==============================
+# Render Production Setup
+# ==============================
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)

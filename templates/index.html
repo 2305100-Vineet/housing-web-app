@@ -130,11 +130,16 @@
 </style>
 
 <script>
-let toggleSample = true;
-
 function fillSample() {
 
-    if (toggleSample) {
+    let toggleSample = localStorage.getItem("sampleToggle");
+
+    if (toggleSample === null) {
+        toggleSample = "high";
+    }
+
+    if (toggleSample === "high") {
+
         // HIGH VALUE SAMPLE
         document.getElementsByName("MedInc")[0].value = 8.5;
         document.getElementsByName("HouseAge")[0].value = 20;
@@ -145,7 +150,10 @@ function fillSample() {
         document.getElementsByName("Latitude")[0].value = 34;
         document.getElementsByName("Longitude")[0].value = -118;
 
+        localStorage.setItem("sampleToggle", "low");
+
     } else {
+
         // LOW VALUE SAMPLE
         document.getElementsByName("MedInc")[0].value = 0.8;
         document.getElementsByName("HouseAge")[0].value = 40;
@@ -155,9 +163,9 @@ function fillSample() {
         document.getElementsByName("AveOccup")[0].value = 4;
         document.getElementsByName("Latitude")[0].value = 38;
         document.getElementsByName("Longitude")[0].value = -121;
-    }
 
-    toggleSample = !toggleSample;
+        localStorage.setItem("sampleToggle", "high");
+    }
 }
 </script>
 
@@ -217,3 +225,4 @@ function fillSample() {
 
 </body>
 </html>
+

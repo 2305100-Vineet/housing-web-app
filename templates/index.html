@@ -1,246 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>California Housing Prediction System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
         body {
-            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .page-title {
+            height: 100vh;
             color: white;
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-align: center;
         }
 
         .container {
             background: white;
-            padding: 40px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 700px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            animation: fadeIn 0.8s ease-in-out;
+            color: black;
+            padding: 30px;
+            border-radius: 12px;
+            width: 420px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
         }
 
         .subtitle {
             text-align: center;
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
+            color: gray;
             margin-bottom: 20px;
         }
 
-        .section-title {
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
         input {
-            padding: 12px;
-            border-radius: 8px;
+            width: 48%;
+            padding: 8px;
+            margin: 5px 1%;
+            border-radius: 5px;
             border: 1px solid #ccc;
-            transition: 0.3s;
         }
 
-        input:focus {
-            border-color: #4e73df;
-            outline: none;
+        .row {
+            display: flex;
+            justify-content: space-between;
         }
 
         button {
-            grid-column: span 2;
-            padding: 14px;
-            background: #4e73df;
-            color: white;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
+            font-size: 14px;
             cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #2e59d9;
         }
 
         .sample-btn {
-            background: #858796;
+            background-color: #888;
+            color: white;
         }
 
-        .sample-btn:hover {
-            background: #6c757d;
-        }
-
-        .spinner {
-            display: none;
-            margin: 20px auto;
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid #4e73df;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .predict-btn {
+            background-color: #2c5364;
+            color: white;
         }
 
         .result {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #eafaf1;
-            color: #155724;
-            text-align: center;
-            font-weight: 500;
-            animation: fadeResult 0.8s ease-in-out;
-        }
-
-        .error {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #fdecea;
-            color: #b71c1c;
+            margin-top: 15px;
+            padding: 10px;
+            background: #e6f2ff;
+            border-radius: 6px;
             text-align: center;
         }
 
-        footer {
-            margin-top: 25px;
-            color: white;
+        .footer {
             text-align: center;
-            font-size: 14px;
-        }
-
-        footer a {
-            color: #fff;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeResult {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @media(max-width: 600px) {
-            form {
-                grid-template-columns: 1fr;
-            }
-            button {
-                grid-column: span 1;
-            }
+            margin-top: 15px;
+            font-size: 12px;
+            color: gray;
         }
     </style>
-
-    <script>
-        function showSpinner() {
-            document.getElementById("spinner").style.display = "block";
-        }
-
-        function fillSample() {
-            document.getElementsByName("MedInc")[0].value = 5;
-            document.getElementsByName("HouseAge")[0].value = 25;
-            document.getElementsByName("AveRooms")[0].value = 6;
-            document.getElementsByName("AveBedrms")[0].value = 1;
-            document.getElementsByName("Population")[0].value = 800;
-            document.getElementsByName("AveOccup")[0].value = 3;
-            document.getElementsByName("Latitude")[0].value = 34;
-            document.getElementsByName("Longitude")[0].value = -118;
-        }
-    </script>
 </head>
 
 <body>
 
-<div class="page-title">
-    🏠 California Housing Prediction System
-</div>
-
 <div class="container">
 
+    <h2>🏠 California Housing Prediction System</h2>
     <div class="subtitle">
         Based on California Housing Dataset (1990 U.S. Census Data)
     </div>
 
-    <div class="section-title">
-        Enter Housing Features
-    </div>
+    <form action="/" method="POST">
 
-    <form action="/predict" method="POST" onsubmit="showSpinner()">
-        <input type="number" step="any" name="MedInc" placeholder="Median Income" required>
-        <input type="number" step="any" name="HouseAge" placeholder="House Age" required>
-        <input type="number" step="any" name="AveRooms" placeholder="Average Rooms" required>
-        <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms" required>
-        <input type="number" step="any" name="Population" placeholder="Population" required>
-        <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy" required>
-        <input type="number" step="any" name="Latitude" placeholder="Latitude" required>
-        <input type="number" step="any" name="Longitude" placeholder="Longitude" required>
+        <div class="row">
+            <input type="number" step="any" name="MedInc" placeholder="Median Income" required>
+            <input type="number" step="any" name="HouseAge" placeholder="House Age" required>
+        </div>
 
-        <button type="button" class="sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
-        <button type="submit">🔍 Predict Housing Category</button>
+        <div class="row">
+            <input type="number" step="any" name="AveRooms" placeholder="Average Rooms" required>
+            <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms" required>
+        </div>
+
+        <div class="row">
+            <input type="number" step="any" name="Population" placeholder="Population" required>
+            <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy" required>
+        </div>
+
+        <div class="row">
+            <input type="number" step="any" name="Latitude" placeholder="Latitude" required>
+            <input type="number" step="any" name="Longitude" placeholder="Longitude" required>
+        </div>
+
+        <button type="button" class="sample-btn" onclick="fillSampleValues()">
+            ⚡ Fill Sample Values
+        </button>
+
+        <button type="submit" class="predict-btn">
+            🔍 Predict Housing Category
+        </button>
+
     </form>
 
-    <div class="spinner" id="spinner"></div>
-
     {% if market_value %}
-        <div class="result">
-            <p><strong>Estimated Market Value:</strong> ${{ market_value }}</p>
-            <p><strong>Predicted Category:</strong> {{ tier }}</p>
-        </div>
+    <div class="result">
+        <strong>Estimated Market Value:</strong> ${{ market_value }} <br>
+        <strong>Predicted Category:</strong> {{ tier }}
+    </div>
     {% endif %}
 
     {% if error %}
-        <div class="error">
-            {{ error }}
-        </div>
+    <div class="result" style="background:#ffe6e6;">
+        Error: {{ error }}
+    </div>
     {% endif %}
+
+    <div class="footer">
+        Developed by Vineet Kumar Jha
+    </div>
 
 </div>
 
-<footer>
-    Developed by <strong>Vineet Kumar Jha</strong> |
-    <a href="https://github.com/2305100-Vineet" target="_blank">
-        View GitHub Profile
-    </a>
-</footer>
+<script>
+let sampleIndex = 0;
+
+const samples = [
+    // HIGH
+    [8.5, 5, 7, 1.5, 800, 2.5, 34.0, -118.2],
+
+    // LOW
+    [0.8, 40, 3.5, 1.4, 3500, 4.5, 38.7, -121.6],
+
+    // MEDIUM
+    [3.5, 20, 5.0, 1.2, 1500, 3.0, 36.5, -119.8]
+];
+
+function fillSampleValues() {
+    const values = samples[sampleIndex];
+
+    document.getElementsByName("MedInc")[0].value = values[0];
+    document.getElementsByName("HouseAge")[0].value = values[1];
+    document.getElementsByName("AveRooms")[0].value = values[2];
+    document.getElementsByName("AveBedrms")[0].value = values[3];
+    document.getElementsByName("Population")[0].value = values[4];
+    document.getElementsByName("AveOccup")[0].value = values[5];
+    document.getElementsByName("Latitude")[0].value = values[6];
+    document.getElementsByName("Longitude")[0].value = values[7];
+
+    sampleIndex = (sampleIndex + 1) % samples.length;
+}
+</script>
 
 </body>
 </html>

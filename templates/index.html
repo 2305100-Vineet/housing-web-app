@@ -1,178 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>California Housing Prediction System</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
         body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2b5876, #4e4376);
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #4e73df, #1cc88a);
+            padding: 0;
             text-align: center;
             color: white;
         }
 
-        h1 {
+        .header {
             padding: 20px;
-            font-weight: 600;
         }
 
-        .card {
-            background: #f8f9fc;
-            color: #333;
-            width: 500px;
-            margin: auto;
-            padding: 30px;
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .header p {
+            margin-top: 5px;
+            font-size: 16px;
+            color: #e0e0e0;
+        }
+
+        .container {
+            background: #f5f5f5;
+            color: black;
+            width: 450px;
+            margin: 30px auto;
+            padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
         }
 
-        .card h3 {
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
+        h2 {
+            margin-bottom: 10px;
         }
 
         input {
-            width: 48%;
+            width: 100%;
             padding: 10px;
+            margin: 8px 0;
             border-radius: 8px;
             border: 1px solid #ccc;
             font-size: 14px;
         }
 
-        .sample-btn {
+        button {
             width: 100%;
             padding: 12px;
+            margin-top: 10px;
             border: none;
             border-radius: 8px;
-            background-color: #858796;
+            background-color: #2b5876;
             color: white;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
-            margin-top: 10px;
+            font-weight: bold;
         }
 
-        .predict-btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background-color: #4e73df;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 10px;
+        button:hover {
+            background-color: #1f3e54;
         }
 
         .result-box {
-            background-color: #d4edda;
-            color: #155724;
+            margin-top: 20px;
             padding: 15px;
             border-radius: 10px;
-            margin-top: 20px;
-            font-weight: 500;
+            background-color: #e8f5e9;
+            border: 2px solid #2e7d32;
+        }
+
+        .result-box h2 {
+            margin: 5px 0;
+            color: #1b5e20;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+            font-weight: bold;
         }
 
         .footer {
             margin-top: 20px;
-            font-size: 14px;
-            color: white;
+            font-size: 13px;
+            color: #ddd;
         }
     </style>
+
+    <script>
+        let toggle = true;
+
+        function fillSample() {
+            if (toggle) {
+                // High value sample
+                document.getElementsByName("MedInc")[0].value = 8.5;
+                document.getElementsByName("HouseAge")[0].value = 20;
+                document.getElementsByName("AveRooms")[0].value = 7;
+                document.getElementsByName("AveBedrms")[0].value = 1;
+                document.getElementsByName("Population")[0].value = 1000;
+                document.getElementsByName("AveOccup")[0].value = 2;
+                document.getElementsByName("Latitude")[0].value = 34;
+                document.getElementsByName("Longitude")[0].value = -118;
+            } else {
+                // Low value sample
+                document.getElementsByName("MedInc")[0].value = 0.8;
+                document.getElementsByName("HouseAge")[0].value = 40;
+                document.getElementsByName("AveRooms")[0].value = 3;
+                document.getElementsByName("AveBedrms")[0].value = 1.5;
+                document.getElementsByName("Population")[0].value = 4000;
+                document.getElementsByName("AveOccup")[0].value = 4;
+                document.getElementsByName("Latitude")[0].value = 38;
+                document.getElementsByName("Longitude")[0].value = -121;
+            }
+
+            toggle = !toggle;
+        }
+    </script>
 </head>
 
 <body>
 
+<div class="header">
     <h1>🏠 California Housing Prediction System</h1>
+    <p>End-to-End Machine Learning Web Application (Flask + ML Model)</p>
+    <p>Course: Applications Development Laboratory (CS33002) | Student: Vineet Kumar Jha | 6th Semester KIIT</p>
+</div>
 
-    <div class="card">
+<div class="container">
+    <h2>Enter Housing Features</h2>
+    <p>Enter numeric values for real-time prediction</p>
 
-        <p>Based on California Housing Dataset (1990 U.S. Census Data)</p>
-        <h3>Enter Housing Features</h3>
+    <!-- FIXED ACTION -->
+    <form action="/" method="post">
 
-        <form method="POST" action="/">
+        <input type="number" step="any" name="MedInc" placeholder="Median Income (e.g. 5.0)" required>
+        <input type="number" step="any" name="HouseAge" placeholder="House Age (e.g. 25)" required>
+        <input type="number" step="any" name="AveRooms" placeholder="Average Rooms (e.g. 6)" required>
+        <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms (e.g. 1)" required>
+        <input type="number" step="any" name="Population" placeholder="Population (e.g. 800)" required>
+        <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy (e.g. 3)" required>
+        <input type="number" step="any" name="Latitude" placeholder="Latitude (e.g. 34)" required>
+        <input type="number" step="any" name="Longitude" placeholder="Longitude (e.g. -118)" required>
 
-            <div class="input-group">
-                <input type="number" step="any" name="MedInc" required>
-                <input type="number" step="any" name="HouseAge" required>
-            </div>
+        <button type="button" onclick="fillSample()">✨ Fill Sample Values</button>
 
-            <div class="input-group">
-                <input type="number" step="any" name="AveRooms" required>
-                <input type="number" step="any" name="AveBedrms" required>
-            </div>
+        <button type="submit">🔍 Predict Market Value & Price Tier</button>
+    </form>
 
-            <div class="input-group">
-                <input type="number" step="any" name="Population" required>
-                <input type="number" step="any" name="AveOccup" required>
-            </div>
-
-            <div class="input-group">
-                <input type="number" step="any" name="Latitude" required>
-                <input type="number" step="any" name="Longitude" required>
-            </div>
-
-            <button type="button" class="sample-btn" onclick="fillSampleValues()">
-                ✨ Fill Sample Values
-            </button>
-
-            <button type="submit" class="predict-btn">
-                🔎 Predict Housing Category
-            </button>
-
-        </form>
-
-        {% if market_value %}
-        <div class="result-box">
-            Estimated Market Value: ${{ market_value }} <br>
-            Predicted Category: {{ tier }}
-        </div>
-        {% endif %}
-
-        {% if error %}
-        <div class="result-box" style="background:#f8d7da; color:#721c24;">
-            {{ error }}
-        </div>
-        {% endif %}
-
+    {% if market_value %}
+    <div class="result-box">
+        <h2>💰 Estimated Market Value: ${{ market_value }}</h2>
+        <h2>🏷️ Price Tier: {{ tier }}</h2>
     </div>
+    {% endif %}
 
-    <div class="footer">
-        Developed by <b>Vineet Kumar Jha</b> | View GitHub Profile
+    {% if error %}
+    <div class="error">
+        Error: {{ error }}
     </div>
+    {% endif %}
+</div>
 
-<script>
-let sampleIndex = 0;
-
-const samples = [
-    // HIGH VALUE (Strong income, urban LA)
-    [9.5, 8, 7.5, 1.2, 900, 2.5, 34.05, -118.25],
-
-    // LOW VALUE (Low income, high density inland)
-    [0.5, 45, 3.0, 1.5, 4000, 5.0, 38.5, -121.5],
-
-    // MEDIUM VALUE (Balanced suburban)
-    [3.8, 20, 5.5, 1.1, 1500, 3.0, 36.7, -119.8]
-];
-
-function fillSampleValues() {
-    const inputs = document.querySelectorAll("input[type='number']");
-    const values = samples[sampleIndex];
-
-    for (let i = 0; i < inputs.length; i++) {
-        inputs[i].value = values[i];
-    }
-
-    sampleIndex = (sampleIndex + 1) % samples.length;
-}
-</script>
+<div class="footer">
+    Developed for CS33002 Lab | End-to-End ML Project with Regression & Classification Deployment
+</div>
 
 </body>
 </html>

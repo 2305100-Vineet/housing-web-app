@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import numpy as np
 import joblib
-import os
 
 app = Flask(__name__)
 
@@ -35,11 +34,9 @@ def home():
 
             features_array = np.array([features])
 
-            # Regression prediction
             market_value = reg_model.predict(features_array)[0]
             estimated_price = round(market_value * 100000, 2)
 
-            # Classification prediction
             category_pred = rf_model.predict(features_array)[0]
 
             category_map = {
@@ -60,12 +57,3 @@ def home():
             return render_template("index.html", error=str(e))
 
     return render_template("index.html")
-
-
-# ==============================
-# Render Production Setup
-# ==============================
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)

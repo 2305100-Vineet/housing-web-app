@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>California Housing Prediction System</title>
 
 <style>
@@ -21,7 +22,7 @@
 
     .header h1 {
         margin: 0;
-        font-size: 30px;  /* slightly reduced */
+        font-size: 30px;
         font-weight: 600;
     }
 
@@ -34,9 +35,9 @@
     .container {
         background: #f1f1f1;
         color: black;
-        width: 570px;   /* slightly smaller */
+        width: 570px;
         margin: 22px auto;
-        padding: 22px;  /* slightly reduced */
+        padding: 22px;
         border-radius: 20px;
         box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
     }
@@ -112,7 +113,7 @@
     .footer {
         margin-top: 25px;
         padding-bottom: 18px;
-        font-size: 19px;  /* slightly reduced */
+        font-size: 19px;
         color: #ffffff;
         font-weight: 300;
     }
@@ -128,6 +129,27 @@
 
     .footer a:hover {
         text-decoration: underline;
+    }
+
+    /* ✅ Responsive Mobile Fix */
+    @media (max-width: 768px) {
+
+        .container {
+            width: 90%;
+            padding: 18px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .header h1 {
+            font-size: 24px;
+        }
+
+        .footer {
+            font-size: 16px;
+        }
     }
 </style>
 

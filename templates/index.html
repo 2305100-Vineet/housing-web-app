@@ -16,76 +16,77 @@
     }
 
     .header {
-        padding: 18px 0 8px 0;
+        padding: 15px 0 6px 0;
     }
 
     .header h1 {
         margin: 0;
-        font-size: 34px;
+        font-size: 30px;  /* slightly reduced */
         font-weight: 600;
     }
 
     .header p {
-        margin-top: 6px;
-        font-size: 14px;
+        margin-top: 5px;
+        font-size: 13px;
         color: #e0e0e0;
     }
 
     .container {
         background: #f1f1f1;
         color: black;
-        width: 600px;
-        margin: 25px auto;
-        padding: 25px;
+        width: 570px;   /* slightly smaller */
+        margin: 22px auto;
+        padding: 22px;  /* slightly reduced */
         border-radius: 20px;
         box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
     }
 
     .container h2 {
         margin-bottom: 4px;
+        font-size: 22px;
     }
 
     .subtitle {
         color: #555;
-        font-size: 13px;
-        margin-bottom: 18px;
+        font-size: 12.5px;
+        margin-bottom: 16px;
     }
 
     .form-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 14px;
+        gap: 12px;
     }
 
     input {
-        padding: 10px;
+        padding: 9px;
         border-radius: 8px;
         border: 1px solid #ccc;
-        font-size: 13px;
+        font-size: 12.5px;
         width: 100%;
         box-sizing: border-box;
     }
 
     button {
         width: 100%;
-        padding: 12px;
+        padding: 11px;
         border: none;
         border-radius: 8px;
         color: white;
-        font-size: 15px;
+        font-size: 14px;
         cursor: pointer;
         font-weight: 500;
         transition: 0.3s;
     }
 
     .sample-btn {
-        margin-top: 18px;
+        margin-top: 16px;
         background-color: #7e7e8a;
     }
 
     .predict-btn {
         background-color: #4f6bdc;
-        margin-top: 12px;
+        margin-top: 10px;
     }
 
     button:hover {
@@ -93,24 +94,25 @@
     }
 
     .result-box {
-        margin-top: 20px;
-        padding: 15px;
+        margin-top: 18px;
+        padding: 13px;
         border-radius: 10px;
         background-color: #d8f3dc;
         color: #1b5e20;
         font-weight: 500;
+        font-size: 14px;
     }
 
     .error {
         color: red;
-        margin-top: 12px;
+        margin-top: 10px;
         font-weight: bold;
     }
 
     .footer {
-        margin-top: 30px;
-        padding-bottom: 20px;
-        font-size: 21px;
+        margin-top: 25px;
+        padding-bottom: 18px;
+        font-size: 19px;  /* slightly reduced */
         color: #ffffff;
         font-weight: 300;
     }
@@ -140,7 +142,6 @@ function fillSample() {
 
     if (toggleSample === "high") {
 
-        // HIGH VALUE SAMPLE
         document.getElementsByName("MedInc")[0].value = 8.5;
         document.getElementsByName("HouseAge")[0].value = 20;
         document.getElementsByName("AveRooms")[0].value = 7;
@@ -154,7 +155,6 @@ function fillSample() {
 
     } else {
 
-        // LOW VALUE SAMPLE
         document.getElementsByName("MedInc")[0].value = 0.8;
         document.getElementsByName("HouseAge")[0].value = 40;
         document.getElementsByName("AveRooms")[0].value = 3;
@@ -182,23 +182,18 @@ function fillSample() {
     <div class="subtitle">Enter numeric values for real-time prediction</div>
 
     <form action="/" method="post">
-
         <div class="form-grid">
             <input type="number" step="any" name="MedInc" placeholder="Median Income" required>
             <input type="number" step="any" name="HouseAge" placeholder="House Age" required>
-
             <input type="number" step="any" name="AveRooms" placeholder="Average Rooms" required>
             <input type="number" step="any" name="AveBedrms" placeholder="Average Bedrooms" required>
-
             <input type="number" step="any" name="Population" placeholder="Population" required>
             <input type="number" step="any" name="AveOccup" placeholder="Average Occupancy" required>
-
             <input type="number" step="any" name="Latitude" placeholder="Latitude" required>
             <input type="number" step="any" name="Longitude" placeholder="Longitude" required>
         </div>
 
         <button type="button" class="sample-btn" onclick="fillSample()">✨ Fill Sample Values</button>
-
         <button type="submit" class="predict-btn">🔍 Predict Housing Category</button>
     </form>
 

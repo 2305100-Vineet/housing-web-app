@@ -6,19 +6,29 @@ app = Flask(__name__)
 
 reg_model = None
 rf_model = None
+models_loaded = False
+
 
 def load_models():
-    global reg_model, rf_model
-    if reg_model is None or rf_model is None:
+    global reg_model, rf_model, models_loaded
+    if not models_loaded:
         reg_model = joblib.load("reg_model.pkl")
         rf_model = joblib.load("rf_model.pkl")
+        models_loaded = True
+
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    global models_loaded
+
+    # 🔥 Load models during first GET request (after server is healthy)
+    if request.method == "GET" and not models_loaded:
+        load_models()
 
     if request.method == "POST":
         try:
-            load_models()  # 🔥 load only when needed
+            # Ensure models are loaded
+            load_models()
 
             features = [
                 float(request.form["MedInc"]),
@@ -57,6 +67,7 @@ def home():
             return render_template("index.html", error=str(e), inputs=None)
 
     return render_template("index.html", inputs=None)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

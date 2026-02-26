@@ -4,23 +4,22 @@ import joblib
 
 app = Flask(__name__)
 
-# ==============================
-# Load Models
-# ==============================
+reg_model = None
+rf_model = None
 
-reg_model = joblib.load("reg_model.pkl")
-rf_model = joblib.load("rf_model.pkl")
-
-# ==============================
-# Routes
-# ==============================
+def load_models():
+    global reg_model, rf_model
+    if reg_model is None or rf_model is None:
+        reg_model = joblib.load("reg_model.pkl")
+        rf_model = joblib.load("rf_model.pkl")
 
 @app.route("/", methods=["GET", "POST"])
 def home():
 
     if request.method == "POST":
         try:
-            # Collect input values
+            load_models()  # 🔥 load only when needed
+
             features = [
                 float(request.form["MedInc"]),
                 float(request.form["HouseAge"]),
@@ -34,11 +33,9 @@ def home():
 
             features_array = np.array([features])
 
-            # Regression Prediction
             market_value = reg_model.predict(features_array)[0]
             estimated_price = round(market_value * 100000, 2)
 
-            # Classification Prediction
             category_pred = rf_model.predict(features_array)[0]
 
             category_map = {
@@ -49,7 +46,6 @@ def home():
 
             category = category_map.get(category_pred, "Unknown")
 
-            # 🔥 Send inputs back to template
             return render_template(
                 "index.html",
                 market_value=f"{estimated_price:,.2f}",
@@ -60,9 +56,7 @@ def home():
         except Exception as e:
             return render_template("index.html", error=str(e), inputs=None)
 
-    # GET request
     return render_template("index.html", inputs=None)
-
 
 if __name__ == "__main__":
     app.run(debug=True)

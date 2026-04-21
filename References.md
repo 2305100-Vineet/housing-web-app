@@ -20,21 +20,12 @@
 | Resource | Link |
 |----------|------|
 | SAP Help Portal (Main) | https://help.sap.com |
-| SAP SD — Sales & Distribution | https://help.sap.com/docs/SAP_ERP/8308e6d301d54584a33cd04a9861bc52 |
-| SAP MM — Materials Management | https://help.sap.com/docs/SAP_ERP/4f5947e1b5594e6f93c3d36516a5af04 |
-| SAP FI — Financial Accounting | https://help.sap.com/docs/SAP_ERP/f7e6c7ee1cee4e32b58b70d98e90c5f8 |
-| SAP S/4HANA — Order to Cash | https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/7b3bee6b97b14e3d8944e52c35bd15f4 |
-| SAP Community — SD Forum | https://community.sap.com/topics/sd |
-
----
-
-## SAP Learning & Training
-
-| Resource | Platform | Link |
-|----------|----------|------|
-| SAP Learning Hub | SAP Official | https://learning.sap.com |
-| openSAP — Free Courses | openSAP | https://open.sap.com |
-| SAP Training Catalog | SAP Official | https://training.sap.com |
+| SAP SD — Sales and Distribution | https://help.sap.com/docs/SUPPORT_CONTENT/sd/3362915062.html |
+| SAP SD — Introduction & Overview | https://help.sap.com/docs/SUPPORT_CONTENT/abap/3353523547.html |
+| SAP S/4HANA — List of SD Documents | https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/7b24a64d9d0941bda1afa753263d9e39/0e1db853dcfcb44ce10000000a174cb4.html |
+| SAP Community Network | https://community.sap.com |
+| SAP Learning Hub | https://learning.sap.com |
+| openSAP — Free Courses | https://open.sap.com |
 
 ---
 
@@ -52,11 +43,12 @@
 
 | Resource | URL |
 |----------|-----|
-| SAP Community Network | https://community.sap.com |
-| GURU99 — SAP SD Training | https://www.guru99.com/sap-sd-training-tutorials.html |
-| ERProof — SAP SD Tutorials | https://erproof.com/sd |
-| SAP Blogs | https://blogs.sap.com |
-| Tutorialspoint — SAP SD | https://www.tutorialspoint.com/sap/sap_sd.htm |
+| GURU99 — SAP SD Free Course | https://www.guru99.com/free-sap-sd-training-course.html |
+| GURU99 — What is SAP SD | https://www.guru99.com/sap-sd-introduction.html |
+| Tutorialspoint — SAP SD Home | https://www.tutorialspoint.com/sap_sd/index.htm |
+| Tutorialspoint — SAP SD Sales Order Processing | https://www.tutorialspoint.com/sap_sd/sap_sd_sales_order_processing.htm |
+| Tutorialspoint — SAP SD Creation of Sales Order | https://www.tutorialspoint.com/sap_sd/sap_sd_creation_sales_order.htm |
+| Tutorialspoint — SAP SD Sales Order Types | https://www.tutorialspoint.com/sap_sd/sap_sd_sales_order_types.htm |
 
 ---
 

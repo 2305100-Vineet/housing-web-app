@@ -2,7 +2,6 @@
 
 ---
 
-## Student Details
 
 | Field | Details |
 |-------|---------|

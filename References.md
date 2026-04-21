@@ -1,137 +1,123 @@
-# 📚 References & Resources
+# References & Resources
 
-> **Project:** SAP MM — Procure-to-Pay (P2P) Capstone Project
-> **Student:** Vaibhav Pratap Dubey | Roll No: 23051719 | KIIT University | 2025–26
+**Project:** SAP SD — Order-to-Cash (O2C) Capstone Project
+**Student:** Vineet Kumar Jha | Roll No: 2305100 | KIIT University | 2025–26
 
 ---
 
-## 🏢 Official SAP Documentation
+## YouTube References
+
+| # | Description | Link |
+|---|-------------|------|
+| 1 | SAP SD Order-to-Cash (O2C) Full Process Walkthrough | https://youtu.be/r3bqbqIR5FI |
+| 2 | SAP SD End-to-End Sales Cycle Tutorial | https://youtu.be/ZRmtgo_84aQ |
+| 3 | SAP SD Complete Tutorial Playlist | https://youtube.com/playlist?list=PLLvAEtvfPC9i4zylwZNMIIClhIiERbIVc |
+
+---
+
+## Official SAP Documentation
 
 | Resource | Link |
 |----------|------|
-| SAP MM Materials Management Overview | https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/material-management |
-| SAP Purchasing (MM-PUR) Documentation | https://help.sap.com/docs/SAP_ERP/mm-purchasing |
-| SAP Invoice Verification (MM-IV) | https://help.sap.com/docs/SAP_ERP/mm-invoice-verification |
-| SAP Goods Movement (MIGO) Guide | https://help.sap.com/docs/SAP_ERP/goods-movement |
-| SAP FI — Accounts Payable | https://help.sap.com/docs/SAP_ERP/fi-accounts-payable |
-| SAP Automatic Payment Program (F110) | https://help.sap.com/docs/SAP_ERP/automatic-payment |
-| SAP Transaction Code Directory | https://help.sap.com/docs/transaction-codes |
+| SAP SD Sales & Distribution Overview | https://help.sap.com/docs/SAP_ERP/sd-sales-distribution |
+| SAP Sales Order Processing (VA01) | https://help.sap.com/docs/SAP_ERP/sales-order |
+| SAP Delivery Processing (VL01N) | https://help.sap.com/docs/SAP_ERP/delivery-processing |
+| SAP Billing & Invoicing (VF01) | https://help.sap.com/docs/SAP_ERP/billing |
+| SAP Available-to-Promise (ATP / CO09) | https://help.sap.com/docs/SAP_ERP/atp-check |
+| SAP FI — Accounts Receivable | https://help.sap.com/docs/SAP_ERP/fi-accounts-receivable |
+| SAP Pricing Condition Technique | https://help.sap.com/docs/SAP_ERP/pricing-conditions |
+| SAP Output Determination Framework | https://help.sap.com/docs/SAP_ERP/output-determination |
 
 ---
 
-## 📖 SAP Learning & Training
+## SAP Learning & Training
 
 | Resource | Platform | Link |
 |----------|----------|------|
-| SAP Learning Hub — MM Fundamentals | SAP Official | https://learning.sap.com |
-| SAP S/4HANA Procurement Training | SAP Official | https://training.sap.com |
-| openSAP — Procurement in SAP S/4HANA | openSAP (Free) | https://open.sap.com |
-| SAP Activate Methodology | SAP Official | https://www.sap.com/activate |
+| SAP Learning Hub — SD Fundamentals | SAP Official | https://learning.sap.com |
+| SAP S/4HANA Sales Training | SAP Official | https://training.sap.com |
+| openSAP — Sales in SAP S/4HANA | openSAP (Free) | https://open.sap.com |
 
 ---
 
-## 🎓 Academic & Course References
+## Academic & Course References
 
 | Reference | Details |
 |-----------|---------|
 | KIIT SAP Project Work Guidance | Internal course document — SAP Data/Analytics Engineer Program, KIIT University, 2025–26 |
 | Capstone Project Submission Guidelines V2 | Internal guidelines document — KIIT University, April 2026 |
-| SAP Project Helper Document | Trainer-shared reference document — SAP MM P2P module, KIIT, 2026 |
+| SAP Project Helper Document | Trainer-shared reference document — SAP SD O2C module, KIIT, 2026 |
 
 ---
 
-## 📺 Video & Tutorial References
-
-| Resource | Platform |
-|----------|----------|
-| SAP MM End-to-End Procure to Pay Process | YouTube — SAP Training Tutorials |
-| How to Create Purchase Order in SAP ME21N | YouTube — SAP MM Tutorials |
-| SAP MIGO Goods Receipt Step by Step | YouTube — SAP Functional Tutorials |
-| SAP MIRO Invoice Verification Tutorial | YouTube — SAP Finance Tutorials |
-| SAP F110 Automatic Payment Run | YouTube — SAP FI Tutorials |
-| SAP Vendor Master XK01 Creation Guide | YouTube — SAP MM Beginner Series |
-
----
-
-## 🌐 Online Knowledge Bases
+## Online Knowledge Bases
 
 | Resource | URL |
 |----------|-----|
-| SAP Community Network (SCN) | https://community.sap.com |
-| SAP Wiki — MM Module | https://wiki.scn.sap.com/wiki/display/MM |
-| ERProof — SAP MM Tutorials | https://erproof.com/mm |
-| SAP Tutorials Point | https://www.tutorialspoint.com/sap |
-| GURU99 — SAP MM Training | https://www.guru99.com/sap-mm-training-tutorials.html |
-| SAP Blogs — Procurement | https://blogs.sap.com/tags/procurement |
+| SAP Community Network | https://community.sap.com |
+| SAP Wiki — SD Module | https://wiki.scn.sap.com/wiki/display/SD |
+| ERProof — SAP SD Tutorials | https://erproof.com/sd |
+| GURU99 — SAP SD Training | https://www.guru99.com/sap-sd-training-tutorials.html |
+| SAP Blogs — Sales & Distribution | https://blogs.sap.com/tags/sales-distribution |
 
 ---
 
-## 📘 Key SAP Concepts Referenced
+## Key Concepts Referenced
 
 | Concept | Description | Used In |
 |---------|-------------|---------|
-| Three-Way Match | Matching PO quantity, GR quantity, and Invoice quantity before approving payment | MIRO (Step 6) |
-| GR/IR Clearing Account | Temporary bridging account between goods receipt and invoice receipt | MIGO + MIRO |
-| Moving Average Price (MAP) | Inventory valuation method that recalculates cost with each goods movement | MM01 Accounting View |
-| Commitment Accounting | Budget reservation in CO triggered at PO creation before physical receipt | ME21N (Step 4) |
-| Automatic Account Determination | SAP automatically posts to correct GL accounts based on valuation class and transaction key | MIGO + MIRO |
-| Document Flow | Linked chain of documents (PR→PO→GR→Invoice→Payment) for full audit traceability | All Steps |
-| Payment Terms | Agreement on when vendor must be paid (e.g., Net 30, 2/10 Net 30) | XK01 + MIRO |
-| Tolerance Limits | Acceptable variance between PO price/qty and invoice price/qty before auto-blocking | MIRO (Step 6) |
-| DME File | Data Medium Exchange file — electronic bank transfer file generated by F110 | F110 (Step 7) |
-| MRP Run | Material Requirements Planning — auto-generates PRs based on stock shortfalls | ME51N trigger |
+| Document Flow | Linked chain — Inquiry → Quotation → Sales Order → Delivery → Invoice → Payment | All Steps |
+| ATP (Available-to-Promise) | Real-time stock check against confirmed demands to commit a delivery date | CO09 — Step 5 |
+| Post Goods Issue (PGI) | Inventory reduction + automatic COGS posting in FI triggered by delivery | VL02N — Step 6 |
+| Pricing Condition Technique | Framework for applying discounts, surcharges, and taxes using condition records | VA01 — Step 4 |
+| Output Determination | Framework for auto-generating and sending invoice PDFs to customers | VF01 — Step 7 |
+| Credit Management | Automated credit limit check at sales order to block high-risk customers | VA01 — Step 4 |
+| Incoterms | International trade terms defining delivery responsibility (CIF, FOB, EXW) | VA01 — Step 4 |
+| Days Sales Outstanding (DSO) | KPI measuring average days taken to collect payment after invoice | VF01 + F-28 |
+| BAPI / IDOC | SAP interfaces for integrating external systems with SAP SD | Integration layer |
 
 ---
 
-## 🔧 SAP Transaction Codes — Full Reference
+## Full T-Code Reference
 
 | T-Code | Full Name | Module |
 |--------|-----------|--------|
-| XK01 | Create Vendor Master | MM / FI |
-| XK02 | Change Vendor Master | MM / FI |
-| XK03 | Display Vendor Master | MM / FI |
+| XD01 | Create Customer Master | SD / FI |
+| XD02 | Change Customer Master | SD / FI |
+| XD03 | Display Customer Master | SD / FI |
 | MM01 | Create Material Master | MM |
-| MM02 | Change Material Master | MM |
-| ME51N | Create Purchase Requisition | MM |
-| ME52N | Change Purchase Requisition | MM |
-| ME21N | Create Purchase Order | MM |
-| ME22N | Change Purchase Order | MM |
-| ME23N | Display Purchase Order | MM |
-| MIGO | Goods Movement (Receipt/Issue/Transfer) | MM / FI |
-| MIRO | Logistics Invoice Verification | MM / FI |
-| MIR4 | Display Invoice Document | MM / FI |
-| F-53 | Post Outgoing Payment (Manual) | FI |
-| F110 | Automatic Payment Program | FI |
-| FBL1N | Vendor Line Items (Open/Cleared) | FI |
-| FB60 | Enter Vendor Invoice | FI |
-| ME2M | Purchase Orders by Material | MM |
-| MB52 | Warehouse Stocks of Material | MM |
-| MB51 | Material Document List | MM |
+| VA11 | Create Inquiry | SD |
+| VA21 | Create Quotation | SD |
+| VA01 | Create Sales Order | SD |
+| VA02 | Change Sales Order | SD |
+| VA03 | Display Sales Order | SD |
+| CO09 | Availability Overview (ATP) | SD / MM |
+| VL01N | Create Outbound Delivery | SD / WM |
+| VL02N | Change Delivery / Post Goods Issue | SD / MM / FI |
+| VF01 | Create Billing Document | SD / FI |
+| VF02 | Change Billing Document | SD / FI |
+| VF03 | Display Billing Document | SD / FI |
+| F-28 | Post Incoming Payment | FI |
+| FBL5N | Customer Line Items Report | FI |
+| VL06O | Outbound Delivery Monitor | SD |
 
 ---
 
-## 📂 Project Files Index
+## Project Files Index
 
 | File | Description |
 |------|-------------|
-| `vaibhav_project_report.pdf` | Complete Capstone Project Report — all 6 pages |
-| `Cover_P2P_Flow_Diagram.png` | P2P process flow cover diagram |
-| `Screenshots/Fig2_Vendor_Master_XK01.png` | SAP XK01 Vendor Master screenshot |
+| `2305100_Vineet_O2C_Capstone_Project_Report.pdf` | Complete Capstone Project Report — 5 pages |
+| `Cover_O2C_Flow_Diagram.png` | O2C process flow cover diagram |
+| `Screenshots/Fig2_Customer_Master_XD01.png` | SAP XD01 Customer Master screenshot |
 | `Screenshots/Fig3_Material_Master_MM01.png` | SAP MM01 Material Master screenshot |
-| `Screenshots/Fig4_Purchase_Requisition_ME51N.png` | SAP ME51N Purchase Requisition screenshot |
-| `Screenshots/Fig5_Purchase_Order_ME21N.png` | SAP ME21N Purchase Order screenshot |
-| `Screenshots/Fig6_Goods_Receipt_MIGO.png` | SAP MIGO Goods Receipt screenshot |
-| `Screenshots/Fig7_Invoice_Verification_MIRO.png` | SAP MIRO Invoice Verification screenshot |
-| `Screenshots/Fig8_Payment_F110.png` | SAP F110 Automatic Payment screenshot |
-| `README.md` | This file — full project documentation |
-| `References.md` | This file — all references and resources |
+| `Screenshots/Fig4_Sales_Order_VA01.png` | SAP VA01 Sales Order screenshot |
+| `Screenshots/Fig5_ATP_Check_CO09.png` | SAP CO09 ATP Availability Overview screenshot |
+| `Screenshots/Fig6_Outbound_Delivery_VL01N.png` | SAP VL01N Outbound Delivery screenshot |
+| `Screenshots/Fig7_Billing_Document_VF01.png` | SAP VF01 Billing Document screenshot |
+| `README.md` | Project overview and full documentation |
+| `References.md` | All references and resources used |
 
 ---
 
-<div align="center">
-
-**Capstone Project — KIIT University | 2025–26**
-
-*SAP Data / Analytics Engineer Program*
-
-</div>
+*Capstone Project — KIIT University | 2025–26 | SAP Data / Analytics Engineer Program*

@@ -10,7 +10,6 @@
 | **Program** | B.Tech — Computer Science Engineering |
 | **Course** | SAP Data / Analytics Engineer |
 | **University** | Kalinga Institute of Industrial Technology (KIIT) |
-| **Submission Date** | April 21, 2026 |
 
 ---
 

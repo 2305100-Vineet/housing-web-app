@@ -23,7 +23,7 @@ An end-to-end implementation of the complete O2C sales cycle using SAP Sales & D
 
 ---
 
-## Repository Structure
+## 📁 Repository Structure
 
 ```
 2305100_project/

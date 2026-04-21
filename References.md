@@ -25,7 +25,6 @@
 | SAP S/4HANA — List of SD Documents | https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/7b24a64d9d0941bda1afa753263d9e39/0e1db853dcfcb44ce10000000a174cb4.html |
 | SAP Community Network | https://community.sap.com |
 | SAP Learning Hub | https://learning.sap.com |
-| openSAP — Free Courses | https://open.sap.com |
 
 ---
 

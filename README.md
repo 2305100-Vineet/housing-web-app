@@ -2,7 +2,7 @@
 
 ---
 
-## 👤 Student Details
+## Student Details
 
 | Field | Details |
 |-------|---------|
@@ -15,7 +15,7 @@
 
 ---
 
-## 📌 Project Title
+## Project Title
 
 **Order-to-Cash (O2C) Process Flow in SAP SD**
 
@@ -23,7 +23,7 @@ An end-to-end implementation of the complete O2C sales cycle using SAP Sales & D
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 2305100_project/
@@ -44,7 +44,7 @@ An end-to-end implementation of the complete O2C sales cycle using SAP Sales & D
 
 ---
 
-## 🏢 Company Blueprint
+## Company Blueprint
 
 **Fictitious Company:** VKJ Trading Co. Pvt. Ltd.
 
@@ -60,7 +60,7 @@ An end-to-end implementation of the complete O2C sales cycle using SAP Sales & D
 
 ---
 
-## 🔄 O2C Process Flow
+## O2C Process Flow
 
 ```
   XD01 / MM01          VA11 / VA21             VA01                CO09
@@ -81,7 +81,7 @@ An end-to-end implementation of the complete O2C sales cycle using SAP Sales & D
 
 ---
 
-## 📋 Step-by-Step Implementation
+## Step-by-Step Implementation
 
 ### Step 1 — Customer Master `XD01`
 
@@ -115,7 +115,7 @@ VF01 generates the customer invoice, posting Accounts Receivable (Dr) and Revenu
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Module | Full Name | Role in O2C |
 |--------|-----------|-------------|
@@ -126,7 +126,7 @@ VF01 generates the customer invoice, posting Accounts Receivable (Dr) and Revenu
 
 ---
 
-## 🔑 Key Transaction Codes
+## Key Transaction Codes
 
 | T-Code | Description | Module |
 |--------|-------------|--------|
@@ -143,7 +143,7 @@ VF01 generates the customer invoice, posting Accounts Receivable (Dr) and Revenu
 
 ---
 
-## ⭐ Unique Points / Key Features
+## Unique Points / Key Features
 
 **Business Value**
 - Real-time stock visibility via ATP prevents overselling and stockouts
@@ -161,7 +161,7 @@ VF01 generates the customer invoice, posting Accounts Receivable (Dr) and Revenu
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 | Enhancement | Description |
 |-------------|-------------|
@@ -173,7 +173,7 @@ VF01 generates the customer invoice, posting Accounts Receivable (Dr) and Revenu
 
 ---
 
-## 💰 Financial Accounting Flow
+## Financial Accounting Flow
 
 ```
 POST GOODS ISSUE (VL02N)
@@ -191,7 +191,7 @@ INCOMING PAYMENT (F-28)
 
 ---
 
-## 📝 Conclusion
+## Conclusion
 
 This project demonstrates a complete SAP SD Order-to-Cash cycle — from organizational structure setup and master data (XD01, MM01) through inquiry and quotation (VA11/VA21), sales order (VA01), ATP check (CO09), outbound delivery with PGI (VL01N), billing (VF01), to final payment clearing (F-28).
 

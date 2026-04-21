@@ -2,6 +2,7 @@
 
 ---
 
+## Student Details
 
 | Field | Details |
 |-------|---------|
@@ -10,6 +11,7 @@
 | **Program** | B.Tech — Computer Science Engineering |
 | **Course** | SAP Data / Analytics Engineer |
 | **University** | Kalinga Institute of Industrial Technology (KIIT) |
+| **Submission Date** | April 21, 2026 |
 
 ---
 
@@ -29,15 +31,15 @@ An end-to-end implementation of the complete O2C sales cycle using SAP Sales & D
 ├── 2305100_Vineet_O2C_Capstone_Project_Report.pdf
 ├── README.md
 ├── References.md
-├── Cover_O2C_Flow_Diagram.png
+├── O2C_Process_Flow_Diagram.png
 │
 └── Screenshots/
-    ├── Fig2_Customer_Master_XD01.png
-    ├── Fig3_Material_Master_MM01.png
-    ├── Fig4_Sales_Order_VA01.png
-    ├── Fig5_ATP_Check_CO09.png
-    ├── Fig6_Outbound_Delivery_VL01N.png
-    └── Fig7_Billing_Document_VF01.png
+    ├── XD01_Customer_Master.png
+    ├── MM01_Material_Master.png
+    ├── VA01_Sales_Order.png
+    ├── CO09_ATP_Check.png
+    ├── VL01N_Delivery.png
+    └── VF01_Billing.png
 ```
 
 ---

@@ -19,14 +19,12 @@
 
 | Resource | Link |
 |----------|------|
-| SAP SD Sales & Distribution Overview | https://help.sap.com/docs/SAP_ERP/sd-sales-distribution |
-| SAP Sales Order Processing (VA01) | https://help.sap.com/docs/SAP_ERP/sales-order |
-| SAP Delivery Processing (VL01N) | https://help.sap.com/docs/SAP_ERP/delivery-processing |
-| SAP Billing & Invoicing (VF01) | https://help.sap.com/docs/SAP_ERP/billing |
-| SAP Available-to-Promise (ATP / CO09) | https://help.sap.com/docs/SAP_ERP/atp-check |
-| SAP FI — Accounts Receivable | https://help.sap.com/docs/SAP_ERP/fi-accounts-receivable |
-| SAP Pricing Condition Technique | https://help.sap.com/docs/SAP_ERP/pricing-conditions |
-| SAP Output Determination Framework | https://help.sap.com/docs/SAP_ERP/output-determination |
+| SAP Help Portal (Main) | https://help.sap.com |
+| SAP SD — Sales & Distribution | https://help.sap.com/docs/SAP_ERP/8308e6d301d54584a33cd04a9861bc52 |
+| SAP MM — Materials Management | https://help.sap.com/docs/SAP_ERP/4f5947e1b5594e6f93c3d36516a5af04 |
+| SAP FI — Financial Accounting | https://help.sap.com/docs/SAP_ERP/f7e6c7ee1cee4e32b58b70d98e90c5f8 |
+| SAP S/4HANA — Order to Cash | https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/7b3bee6b97b14e3d8944e52c35bd15f4 |
+| SAP Community — SD Forum | https://community.sap.com/topics/sd |
 
 ---
 
@@ -34,9 +32,9 @@
 
 | Resource | Platform | Link |
 |----------|----------|------|
-| SAP Learning Hub — SD Fundamentals | SAP Official | https://learning.sap.com |
-| SAP S/4HANA Sales Training | SAP Official | https://training.sap.com |
-| openSAP — Sales in SAP S/4HANA | openSAP (Free) | https://open.sap.com |
+| SAP Learning Hub | SAP Official | https://learning.sap.com |
+| openSAP — Free Courses | openSAP | https://open.sap.com |
+| SAP Training Catalog | SAP Official | https://training.sap.com |
 
 ---
 
@@ -55,10 +53,10 @@
 | Resource | URL |
 |----------|-----|
 | SAP Community Network | https://community.sap.com |
-| SAP Wiki — SD Module | https://wiki.scn.sap.com/wiki/display/SD |
-| ERProof — SAP SD Tutorials | https://erproof.com/sd |
 | GURU99 — SAP SD Training | https://www.guru99.com/sap-sd-training-tutorials.html |
-| SAP Blogs — Sales & Distribution | https://blogs.sap.com/tags/sales-distribution |
+| ERProof — SAP SD Tutorials | https://erproof.com/sd |
+| SAP Blogs | https://blogs.sap.com |
+| Tutorialspoint — SAP SD | https://www.tutorialspoint.com/sap/sap_sd.htm |
 
 ---
 
@@ -108,13 +106,13 @@
 | File | Description |
 |------|-------------|
 | `2305100_Vineet_O2C_Capstone_Project_Report.pdf` | Complete Capstone Project Report — 5 pages |
-| `Cover_O2C_Flow_Diagram.png` | O2C process flow cover diagram |
-| `Screenshots/Fig2_Customer_Master_XD01.png` | SAP XD01 Customer Master screenshot |
-| `Screenshots/Fig3_Material_Master_MM01.png` | SAP MM01 Material Master screenshot |
-| `Screenshots/Fig4_Sales_Order_VA01.png` | SAP VA01 Sales Order screenshot |
-| `Screenshots/Fig5_ATP_Check_CO09.png` | SAP CO09 ATP Availability Overview screenshot |
-| `Screenshots/Fig6_Outbound_Delivery_VL01N.png` | SAP VL01N Outbound Delivery screenshot |
-| `Screenshots/Fig7_Billing_Document_VF01.png` | SAP VF01 Billing Document screenshot |
+| `O2C_Process_Flow_Diagram.png` | O2C process flow cover diagram |
+| `Screenshots/XD01_Customer_Master.png` | SAP XD01 Customer Master screenshot |
+| `Screenshots/MM01_Material_Master.png` | SAP MM01 Material Master screenshot |
+| `Screenshots/VA01_Sales_Order.png` | SAP VA01 Sales Order screenshot |
+| `Screenshots/CO09_ATP_Check.png` | SAP CO09 ATP Availability Overview screenshot |
+| `Screenshots/VL01N_Delivery.png` | SAP VL01N Outbound Delivery screenshot |
+| `Screenshots/VF01_Billing.png` | SAP VF01 Billing Document screenshot |
 | `README.md` | Project overview and full documentation |
 | `References.md` | All references and resources used |
 
